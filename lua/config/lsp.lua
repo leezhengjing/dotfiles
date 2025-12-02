@@ -60,4 +60,5 @@ vim.lsp.enable({
 	"eslint",
 	"mdx_analyzer",
 	"clangd",
+	"sourcekit",
 })
