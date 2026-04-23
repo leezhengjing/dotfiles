@@ -7,6 +7,10 @@ return {
 			"zbirenbaum/copilot.nvim",
 			enabled = false,
 		},
+		{
+			"CopilotChat.nvim",
+			enabled = false,
+		},
 		-- { "noice.nvim", enabled = false },
 	},
 }
