@@ -1,5 +1,10 @@
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+		if client and client.name == "clangd" then
+			vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
+		end
 		local bufmap = function(mode, rhs, lhs)
 			vim.keymap.set(mode, rhs, lhs, { buffer = event.buf })
 		end

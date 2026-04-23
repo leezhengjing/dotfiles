@@ -2,6 +2,21 @@
 -- ==                           EDITOR SETTINGS                            == --
 -- ========================================================================== --
 
+local orig_inlay_hint_handler = vim.lsp.handlers["textDocument/inlayHint"]
+
+vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, config)
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
+
+	-- Drop ALL inlay hints from clangd (they cause invalid extmarks)
+	if client and client.name == "clangd" then
+		return
+	end
+
+	-- Keep inlay hints for every other LSP
+	if orig_inlay_hint_handler then
+		return orig_inlay_hint_handler(err, result, ctx, config)
+	end
+end
 vim.o.number = true
 vim.o.relativenumber = true
 
