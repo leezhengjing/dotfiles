@@ -9,7 +9,13 @@ return {
 		bigfile = { enabled = true },
 		dashboard = { enabled = true },
 		explorer = { enabled = true },
-		image = { enabled = true },
+		image = {
+			doc = {
+				inline = true,
+				math = true,
+			},
+			enabled = true,
+		},
 		indent = { enabled = true },
 		input = { enabled = true },
 		picker = { enabled = true },

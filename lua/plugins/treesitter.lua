@@ -9,6 +9,7 @@ return {
 				enable = true,
 			},
 			ensure_installed = {
+				"cpp",
 				"javascript",
 				"typescript",
 				"css",
