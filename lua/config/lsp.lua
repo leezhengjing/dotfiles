@@ -62,6 +62,8 @@ vim.lsp.enable({
 	"ocamllsp",
 	"vtsls",
 	"marksman",
+	"markdown-oxide",
+	"tailwindcss",
 	"eslint",
 	"mdx_analyzer",
 	"clangd",
