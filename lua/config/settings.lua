@@ -1,5 +1,5 @@
 -- ========================================================================== --
--- ==                           EDITOR SETTINGS                            == --
+--                           EDITOR SETTINGS                            --
 -- ========================================================================== --
 
 local orig_inlay_hint_handler = vim.lsp.handlers["textDocument/inlayHint"]
