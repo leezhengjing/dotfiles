@@ -25,6 +25,8 @@ return {
 				"lua",
 				"luadoc",
 				"luap",
+				"markdown",
+				"markdown_inline",
 				"ocaml",
 				"printf",
 				"python",
