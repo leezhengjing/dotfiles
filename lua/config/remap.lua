@@ -53,3 +53,21 @@ vim.keymap.set("n", "<leader>w>", "100<C-w><")
 vim.keymap.set("n", "<leader>wm", "<cmd>vertical resize 1<CR>")
 
 vim.keymap.set("n", "<C-a>", "ggVG")
+
+vim.keymap.set("n", "<leader>pb", function()
+	local file_path = vim.api.nvim_buf_get_name(0)
+	local script_path = "/Users/leezhengjing/Github/zj-portfolio/scripts/publish.mjs"
+	local cmd = string.format("node %s '%s'", script_path, file_path)
+
+	print("🚀 Publishing to zj-portfolio...")
+	local output = vim.fn.system(cmd)
+	print(output)
+end, { desc = "Publish Blog Post" })
+
+-- Quickly turn the current line into a Figure Caption
+vim.keymap.set("n", "<leader>fc", function()
+	local line = vim.api.nvim_get_current_line()
+	-- Wrap in italics and add Figure prefix
+	local new_line = "*Figure: " .. line .. "*"
+	vim.api.nvim_set_current_line(new_line)
+end, { desc = "Format line as Figure Caption" })
