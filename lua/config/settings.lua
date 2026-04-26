@@ -39,6 +39,8 @@ vim.o.incsearch = true
 
 vim.o.termguicolors = true
 
+vim.o.conceallevel = 2
+
 vim.o.scrolloff = 8
 vim.o.signcolumn = "yes"
 
@@ -54,6 +56,17 @@ vim.o.showmode = false
 vim.o.timeoutlen = 300
 
 vim.o.foldmethod = "manual"
+
+-- Disable autoformat for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "obsidian" },
+	callback = function()
+		vim.b.autoformat = false
+		-- Only override <leader>w for markdown to allow manual "safe" save
+		vim.keymap.set("n", "<leader>w", "<cmd>noa w<cr>", { buffer = true, desc = "Save without formatting" })
+	end,
+})
+
 -- Basic clipboard interaction
 vim.keymap.set({ "n", "x" }, "gy", '"+y', { desc = "Copy to clipboard" })
 vim.keymap.set({ "n", "x" }, "gp", '"+p', { desc = "Paste clipboard content" })
