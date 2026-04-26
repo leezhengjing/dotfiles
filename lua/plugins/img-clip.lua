@@ -5,14 +5,23 @@ return {
 		default = {
 			-- Match Obsidian workflow
 			dir_path = "attachments",
-			extension = "avif", ---@type string | fun(): string
+			extension = "png", ---@type string | fun(): string
 			relative_to_current_file = true,
 			use_absolute_path = false,
-			prompt_for_file_name = true,
+			prompt_for_file_name = false, -- Set to false since we are using a custom function
 			show_dir_path_in_prompt = false,
 
-			-- Process image with ImageMagick to avif
-			process_cmd = "magick - -quality 75 avif:-",
+			-- Custom filename prompt with space-to-hyphen sanitization
+			file_name = function()
+				local name = vim.fn.input("Enter image name: ")
+				if name == "" then
+					return os.date("%Y-%m-%d-%H-%M-%S")
+				end
+				return name:gsub("%s+", "-")
+			end,
+
+			-- Use default PNG saving (no lossy compression)
+			process_cmd = nil,
 
 			-- Drag and drop
 			drag_and_drop = {
