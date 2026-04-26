@@ -15,14 +15,6 @@ return {
 				desc = "List files in current working directory",
 			},
 			{
-				"<C-p>",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.git_files()
-				end,
-				desc = "Telescope git find files",
-			},
-			{
 				";f",
 				function()
 					local builtin = require("telescope.builtin")
@@ -34,12 +26,12 @@ return {
 				desc = "Lists files in your current working directory, respects .gitignore",
 			},
 			{
-				"<leader>ps",
+				"<C-p>",
 				function()
 					local builtin = require("telescope.builtin")
-					builtin.grep_string({ search = vim.fn.input("Grep > ") })
+					builtin.git_files()
 				end,
-				desc = "Grep string",
+				desc = "Telescope git find files",
 			},
 			{
 				";r",
