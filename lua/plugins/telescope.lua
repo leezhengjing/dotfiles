@@ -73,6 +73,29 @@ return {
 				end,
 				desc = "Lists Function names, variables, from Treesitter",
 			},
+			{
+				";/",
+				function()
+					require("telescope.builtin").current_buffer_fuzzy_find()
+				end,
+				desc = "Fuzzy search in current buffer",
+			},
+			{
+				"<leader>ve",
+				function()
+					vim.cmd("edit $MYVIMRC")
+				end,
+				desc = "Edit Neovim Config",
+			},
+			{
+				"<leader>vf",
+				function()
+					require("telescope.builtin").find_files({
+						cwd = vim.fn.stdpath("config"),
+					})
+				end,
+				desc = "Find Neovim Config Files",
+			},
 		},
 	},
 }

@@ -10,11 +10,11 @@ return {
 		dashboard = { enabled = true },
 		explorer = { enabled = true },
 		image = {
+			enabled = true,
 			doc = {
 				inline = true,
 				math = true,
 			},
-			enabled = true,
 		},
 		indent = { enabled = true },
 		input = { enabled = true },

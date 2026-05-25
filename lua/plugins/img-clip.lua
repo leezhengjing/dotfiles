@@ -20,8 +20,8 @@ return {
 				return name:gsub("%s+", "-")
 			end,
 
-			-- Use default PNG saving (no lossy compression)
-			process_cmd = nil,
+			-- Process image with ImageMagick to png
+			process_cmd = "magick - -quality 75 png:-",
 
 			-- Drag and drop
 			drag_and_drop = {

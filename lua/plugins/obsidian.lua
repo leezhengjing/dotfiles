@@ -23,13 +23,14 @@ return {
 		---@param title string|?
 		---@return string
 		note_id_func = function(title)
-			-- If title is given, transform it into valid file name (no timestamp prefix).
+			local timestamp = os.date("%Y%m%d%H%M")
+			-- If title is given, transform it into valid file name with timestamp prefix.
 			if title ~= nil and title ~= "" then
-				return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-			else
-				-- If title is nil, use the timestamp as a fallback.
-				return os.date("%Y%m%d%H%M")
+				local slug = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+				return string.format("%s-%s", timestamp, slug)
 			end
+			-- If title is nil, use the timestamp as a fallback.
+			return timestamp
 		end,
 
 		-- Configure the default template for all new notes
