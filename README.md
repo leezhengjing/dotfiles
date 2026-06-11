@@ -18,33 +18,30 @@ git commit -m "update config"
 git push
 ```
 
-## Installation (macOS/Linux)
+## Installation (macOS, Linux, and WSL)
 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/leezhengjing/dotfiles.git ~/dotfiles
    ```
 2. **Install GNU Stow:**
-   ```bash
-   brew install stow
-   ```
-3. **Apply configurations:**
+   - macOS: `brew install stow`
+   - Ubuntu/WSL/Debian: `sudo apt update && sudo apt install stow`
+3. **Run the installation script:**
    ```bash
    cd ~/dotfiles
-   stow nvim
-   stow fish
-   stow tmux
+   ./install.sh
    ```
 
-## Installation (Windows)
+## Installation (Native Windows PowerShell)
+*Use this if you want Neovim available in native Windows (cmd/PowerShell) outside of WSL.*
 
 1. **Clone the repository** to your home directory:
    ```powershell
    git clone https://github.com/leezhengjing/dotfiles.git $HOME/dotfiles
    ```
-2. **Run the installation script** (as Administrator to allow symlinks):
+2. **Run the installation script** (as Administrator):
    ```powershell
    cd $HOME/dotfiles
    ./install.ps1
    ```
-   *Note: This script currently only sets up Neovim on Windows.*
