@@ -1,9 +1,9 @@
 # Dotfiles
 
-My configuration files for Neovim and Fish shell, managed with GNU Stow.
+My configuration files for Neovim, Fish shell, and Tmux, managed with GNU Stow.
 
 ## How it works
-This repository uses **GNU Stow** to manage symlinks. The folder structure inside each "package" (like `nvim/` or `fish/`) mimics the structure of your home directory. 
+This repository uses **GNU Stow** to manage symlinks. The folder structure inside each "package" (like `nvim/`, `fish/`, or `tmux/`) mimics the structure of your home directory. 
 
 When you run `stow nvim`, it creates a symlink from `~/.config/nvim` pointing to `~/dotfiles/nvim/.config/nvim`.
 
@@ -33,6 +33,7 @@ git push
    cd ~/dotfiles
    stow nvim
    stow fish
+   stow tmux
    ```
 
 ## Installation (Windows)
