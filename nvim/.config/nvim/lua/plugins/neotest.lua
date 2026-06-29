@@ -6,6 +6,8 @@ return {
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
+			"nvim-neotest/neotest-plenary",
+			"nvim-neotest/neotest-jest",
 		},
 		opts = {
 			-- Can be a list of adapters like what neotest expects,

@@ -71,3 +71,7 @@ vim.keymap.set("n", "<leader>fc", function()
 	local new_line = "*Figure: " .. line .. "*"
 	vim.api.nvim_set_current_line(new_line)
 end, { desc = "Format line as Figure Caption" })
+
+-- Quick shortcuts for closing buffers/windows
+vim.keymap.set("n", "<leader>q", "<cmd>q!<CR>", { desc = "Quit current window/buffer without saving" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bd!<CR>", { desc = "Delete current buffer without saving" })

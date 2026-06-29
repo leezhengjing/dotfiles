@@ -7,6 +7,11 @@ return {
 			enabled = false,
 		},
 		cli = {
+			tools = {
+				antigravity = {
+					cmd = { "agy" },
+				},
+			},
 			mux = {
 				enabled = true,
 			},
