@@ -2,6 +2,20 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+	keys = {
+		{ "<leader>ih", function() Snacks.image.hover() end, desc = "Hover image preview" },
+		{
+			"<leader>iH",
+			function()
+				local cfg = Snacks.image.config.doc
+				local orig_w, orig_h = cfg.max_width, cfg.max_height
+				cfg.max_width, cfg.max_height = 200, 100
+				Snacks.image.hover()
+				cfg.max_width, cfg.max_height = orig_w, orig_h
+			end,
+			desc = "Zoom image preview",
+		},
+	},
 	opts = {
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
