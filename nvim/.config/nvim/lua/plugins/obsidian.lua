@@ -4,6 +4,7 @@ return {
 	lazy = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope.nvim",
 	},
 	---@module 'obsidian'
 	---@type obsidian.config
