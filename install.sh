@@ -20,6 +20,7 @@ echo "Applying configurations..."
 mkdir -p "$HOME/.config"
 
 # Stow packages
+stow git
 stow nvim
 stow fish
 stow tmux
