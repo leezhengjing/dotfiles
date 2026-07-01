@@ -45,3 +45,7 @@ set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.14
 if test -f "$HOME/google-cloud-sdk/path.fish.inc"
     source "$HOME/google-cloud-sdk/path.fish.inc"
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "$HOME/.local/bin" $PATH
