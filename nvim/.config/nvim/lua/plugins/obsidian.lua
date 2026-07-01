@@ -120,5 +120,78 @@ return {
 			end,
 			desc = "Search CP Notes",
 		},
+		{
+			"<leader>ot",
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.find_files({
+					cwd = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/99 - Meta",
+					prompt_title = "Select Template",
+					attach_mappings = function(prompt_bufnr, map)
+						local actions = require("telescope.actions")
+						local action_state = require("telescope.actions.state")
+						actions.select_default:replace(function()
+							actions.close(prompt_bufnr)
+							local selection = action_state.get_selected_entry()
+							if selection then
+								local template = selection[1]:gsub("%.md$", "")
+								vim.schedule(function()
+									vim.ui.input({ prompt = "Enter note title: " }, function(input)
+										if input == nil or input == "" then
+											return
+										end
+										local cmd = string.format("Obsidian new_from_template %s %s", vim.fn.fnameescape(input), vim.fn.fnameescape(template))
+										vim.cmd(cmd)
+									end)
+								end)
+							end
+						end)
+						return true
+					end,
+				})
+			end,
+			desc = "New Note from Template",
+		},
+		{
+			"<leader>om",
+			function()
+				local builtin = require("telescope.builtin")
+				local current_file = vim.fn.expand("%:p")
+				if current_file == "" then
+					vim.notify("No file open", vim.log.levels.WARN)
+					return
+				end
+				local current_name = vim.fn.expand("%:t")
+				builtin.find_files({
+					cwd = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain",
+					prompt_title = "Move to Directory",
+					find_command = { "fd", "--type", "d", "--hidden", "--exclude", ".git" },
+					attach_mappings = function(prompt_bufnr, map)
+						local actions = require("telescope.actions")
+						local action_state = require("telescope.actions.state")
+						actions.select_default:replace(function()
+							actions.close(prompt_bufnr)
+							local selection = action_state.get_selected_entry()
+							if selection then
+								local target_dir = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/" .. selection[1]
+								local new_file = target_dir .. "/" .. current_name
+								vim.schedule(function()
+									local success, err = os.rename(current_file, new_file)
+									if success then
+										vim.cmd("edit " .. vim.fn.fnameescape(new_file))
+										vim.cmd("bdelete! " .. vim.fn.fnameescape(current_file))
+										vim.notify("Moved to " .. target_dir)
+									else
+										vim.notify("Error moving file: " .. tostring(err), vim.log.levels.ERROR)
+									end
+								end)
+							end
+						end)
+						return true
+					end,
+				})
+			end,
+			desc = "Move Note to Directory",
+		},
 	},
 }
