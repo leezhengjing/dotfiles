@@ -132,7 +132,7 @@ return {
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.find_files({
-					cwd = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/99 - Meta",
+					cwd = vault_path,
 					prompt_title = "Select Template",
 					attach_mappings = function(prompt_bufnr, map)
 						local actions = require("telescope.actions")
@@ -174,7 +174,7 @@ return {
 				end
 				local current_name = vim.fn.expand("%:t")
 				builtin.find_files({
-					cwd = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain",
+					cwd = vault_path,
 					prompt_title = "Move to Directory",
 					find_command = { "fd", "--type", "d", "--hidden", "--exclude", ".git" },
 					attach_mappings = function(prompt_bufnr, map)
