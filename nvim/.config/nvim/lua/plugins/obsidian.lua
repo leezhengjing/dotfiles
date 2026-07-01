@@ -1,3 +1,10 @@
+local user = vim.env.USER
+local vault_paths = {
+	SIPSS0694 = vim.fn.expand("~/Google Drive/Other computers/My Mac/Google Drive/Obsidian Brain"),
+	leezhengjing = vim.fn.expand("/Users/leezhengjing/Documents/GDrive/Obsidian Brain"), -- TODO: Update this to your personal laptop's Obsidian path
+}
+local vault_path = vault_paths[user] or vim.fn.expand("~/Obsidian Brain")
+
 return {
 	"obsidian-nvim/obsidian.nvim",
 	version = "*", -- use latest release, remove to use latest commit
@@ -13,7 +20,7 @@ return {
 		workspaces = {
 			{
 				name = "Brain",
-				path = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain",
+				path = vault_path,
 			},
 		},
 		notes_subdir = "06 - Fleeting",
@@ -96,7 +103,7 @@ return {
 		{
 			"<leader>oe",
 			function()
-				require("mini.files").open("/Users/leezhengjing/Documents/GDrive/Obsidian Brain")
+				require("mini.files").open(vault_path)
 			end,
 			desc = "Open Obsidian Vault (mini.files)",
 		},
@@ -105,7 +112,7 @@ return {
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.live_grep({
-					cwd = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain",
+					cwd = vault_path,
 				})
 			end,
 			desc = "Search Obsidian Vault (Content)",
@@ -115,7 +122,7 @@ return {
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.find_files({
-					cwd = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/02 - Areas/Competitive Programming/everyquestionidid",
+					cwd = vault_path .. "/02 - Areas/Competitive Programming/everyquestionidid",
 				})
 			end,
 			desc = "Search CP Notes",
@@ -140,7 +147,11 @@ return {
 										if input == nil or input == "" then
 											return
 										end
-										local cmd = string.format("Obsidian new_from_template %s %s", vim.fn.fnameescape(input), vim.fn.fnameescape(template))
+										local cmd = string.format(
+											"Obsidian new_from_template %s %s",
+											vim.fn.fnameescape(input),
+											vim.fn.fnameescape(template)
+										)
 										vim.cmd(cmd)
 									end)
 								end)
@@ -173,7 +184,8 @@ return {
 							actions.close(prompt_bufnr)
 							local selection = action_state.get_selected_entry()
 							if selection then
-								local target_dir = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/" .. selection[1]
+								local target_dir = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/"
+									.. selection[1]
 								local new_file = target_dir .. "/" .. current_name
 								vim.schedule(function()
 									local success, err = os.rename(current_file, new_file)
