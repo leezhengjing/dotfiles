@@ -132,7 +132,7 @@ return {
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.find_files({
-					cwd = vault_path,
+					cwd = vault_path .. "/99 - Meta",
 					prompt_title = "Select Template",
 					attach_mappings = function(prompt_bufnr, map)
 						local actions = require("telescope.actions")
@@ -184,8 +184,7 @@ return {
 							actions.close(prompt_bufnr)
 							local selection = action_state.get_selected_entry()
 							if selection then
-								local target_dir = "/Users/leezhengjing/Documents/GDrive/Obsidian Brain/"
-									.. selection[1]
+								local target_dir = vault_path .. "/" .. selection[1]
 								local new_file = target_dir .. "/" .. current_name
 								vim.schedule(function()
 									local success, err = os.rename(current_file, new_file)

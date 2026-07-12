@@ -5,6 +5,12 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+		opts = {
+			defaults = {
+				path_display = { "filename_first" },
+				dynamic_preview_title = true,
+			},
+		},
 		keys = {
 			{
 				"<leader>pf",
@@ -19,7 +25,7 @@ return {
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.find_files({
-						no_ignore = false,
+						no_ignore = true,
 						hidden = true,
 					})
 				end,
@@ -40,6 +46,16 @@ return {
 					builtin.live_grep()
 				end,
 				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+			},
+			{
+				";R",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.live_grep({
+						additional_args = { "--hidden", "--no-ignore" },
+					})
+				end,
+				desc = "Search for a string including hidden and gitignored files",
 			},
 			{
 				"\\\\",

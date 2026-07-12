@@ -1,7 +1,3 @@
-[user]
-	email = zhengjing.lee@shopee.com
-	name = Zheng Jing
-
 [core]
     pager = delta
 
@@ -14,3 +10,6 @@
 
 [merge]
     conflictStyle = zdiff3
+
+[include]
+	path = ~/.gitconfig.local

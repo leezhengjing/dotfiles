@@ -31,37 +31,27 @@ end
 
 return {
 	"mfussenegger/nvim-dap",
-	dependencies = {
-		"wojciech-kulik/xcodebuild.nvim",
-	},
+	lazy = false,
 	config = function()
-		local xcodebuild = require("xcodebuild.integrations.dap")
-		xcodebuild.setup()
+		local dap = require("dap")
 
 		local define = vim.fn.sign_define
-		define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
-		define("DapBreakpointRejected", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
-		define("DapStopped", { text = "", texthl = "DiagnosticOk", linehl = "", numhl = "" })
-		define("DapLogPoint", { text = "", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
-		define("DapLogPoint", { text = "", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
+		define("DapBreakpoint", { text = "●", texthl = "DiagnosticError", linehl = "", numhl = "" })
+		define("DapBreakpointRejected", { text = "○", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
+		define("DapStopped", { text = "▶", texthl = "DiagnosticOk", linehl = "CursorLine", numhl = "" })
+		define("DapLogPoint", { text = "◆", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
 
 		setupListeners()
 
-		--when breakpoint is hit, it sets the focus to the buffer with the breakpoint
-		require("dap").defaults.fallback.switchbuf = "usetab,uselast"
+		dap.defaults.fallback.switchbuf = "usetab,uselast"
 
-    --stylua: ignore start
-    vim.keymap.set("n", "<leader>dd", xcodebuild.build_and_debug, { desc = "Build & Debug" })
-    vim.keymap.set("n", "<leader>dr", xcodebuild.debug_without_build, { desc = "Debug Without Building" })
-    vim.keymap.set("n", "<leader>dt", xcodebuild.debug_tests, { desc = "Debug Tests" })
-    vim.keymap.set("n", "<leader>dT", xcodebuild.debug_class_tests, { desc = "Debug Class Tests" })
-    vim.keymap.set("n", "<leader>b", xcodebuild.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-    vim.keymap.set("n", "<leader>B", xcodebuild.toggle_message_breakpoint, { desc = "Toggle Message Breakpoint" })
-		--stylua: ignore end
-
+		vim.keymap.set("n", ";b", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+		vim.keymap.set("n", ";B", function()
+			dap.set_breakpoint(vim.fn.input("Condition: "))
+		end, { desc = "Conditional Breakpoint" })
 		vim.keymap.set("n", "<leader>dx", function()
-			xcodebuild.terminate_session()
-			require("dap").listeners.after["event_terminated"]["me"]()
-		end, { desc = "Terminate debugger" })
+			dap.terminate()
+			dap.listeners.after["event_terminated"]["me"]()
+		end, { desc = "Terminate Debugger" })
 	end,
 }

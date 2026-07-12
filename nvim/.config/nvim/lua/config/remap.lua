@@ -75,3 +75,61 @@ end, { desc = "Format line as Figure Caption" })
 -- Quick shortcuts for closing buffers/windows
 vim.keymap.set("n", "<leader>q", "<cmd>q!<CR>", { desc = "Quit current window/buffer without saving" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bd!<CR>", { desc = "Delete current buffer without saving" })
+
+-- Copy current file's full path to clipboard
+vim.keymap.set("n", "<leader>cp", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	vim.notify(path, vim.log.levels.INFO, { title = "Path copied" })
+end, { desc = "Copy file path to clipboard" })
+
+-- Diff two clipboard pastes in scratch buffers (e.g. two Postman responses).
+-- Press once to paste the first response, press again to paste the second
+-- alongside it and diff them. State resets after the second press.
+local diff_clipboard_state = { active = false }
+
+vim.keymap.set("n", "<leader>dc", function()
+	local lines = vim.split(vim.fn.getreg("+"), "\n", { plain = true })
+
+	if diff_clipboard_state.active then
+		vim.cmd("vsplit")
+	end
+
+	vim.cmd("enew")
+	vim.bo.buftype = "nofile"
+	vim.bo.bufhidden = "wipe"
+	vim.bo.swapfile = false
+	vim.bo.filetype = "json"
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+	vim.cmd("diffthis")
+
+	if diff_clipboard_state.active then
+		diff_clipboard_state.active = false
+	else
+		diff_clipboard_state.active = true
+		vim.notify("Copy the second response, then press <leader>dc again", vim.log.levels.INFO, { title = "Diff Clipboard" })
+	end
+end, { desc = "Diff clipboard contents (press twice to compare two)" })
+
+-- Bail out of an in-progress diff-clipboard pair without pasting a second one
+vim.keymap.set("n", "<leader>dx", function()
+	vim.cmd("diffoff!")
+	diff_clipboard_state.active = false
+end, { desc = "Cancel/turn off diff clipboard comparison" })
+
+-- Show current file path as an indented tree and copy it (useful for notes)
+vim.keymap.set("n", "<leader>cP", function()
+	local path = vim.fn.expand("%:.")
+	local parts = vim.split(path, "/", { plain = true })
+	local lines = {}
+	for i, part in ipairs(parts) do
+		local is_last = i == #parts
+		local indent = string.rep("    ", i - 1)
+		local prefix = i == 1 and "" or (indent .. "└── ")
+		local suffix = (not is_last) and "/" or ""
+		table.insert(lines, prefix .. part .. suffix)
+	end
+	local tree = table.concat(lines, "\n")
+	vim.fn.setreg("+", tree)
+	vim.notify(tree, vim.log.levels.INFO, { title = "Tree path copied" })
+end, { desc = "Copy file path as tree to clipboard" })
