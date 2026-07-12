@@ -1,2 +1,2 @@
 command = /opt/homebrew/bin/fish
-macos-titlebar-style = transparent
+macos-titlebar-style = hidden

@@ -3,20 +3,8 @@ return {
 	priority = 1000,
 	lazy = false,
 	keys = {
-		{
-			"<leader>sd",
-			function()
-				Snacks.picker.diagnostics()
-			end,
-			desc = "Workspace diagnostics",
-		},
-		{
-			"<leader>ih",
-			function()
-				Snacks.image.hover()
-			end,
-			desc = "Hover image preview",
-		},
+		{ "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Workspace diagnostics" },
+		{ "<leader>ih", function() Snacks.image.hover() end, desc = "Hover image preview" },
 		{
 			"<leader>iH",
 			function()
@@ -34,19 +22,7 @@ return {
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
 		bigfile = { enabled = true },
-		dashboard = {
-			enabled = true,
-			preset = {
-				header = [[
- ______   ___
-|___  /  |_  |
-   / /     | |
-  / /      | |
-./ /___/\__/ /
-\_____/\____/
-]],
-			},
-		},
+		dashboard = { enabled = true },
 		explorer = { enabled = true },
 		image = {
 			enabled = true,
