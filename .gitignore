@@ -4,3 +4,4 @@ fish/.config/fish/fish_variables
 tmux/.config/tmux/plugins/tmux-gruvbox
 tmux/.config/tmux/plugins/tmux-sensible
 tmux/.config/tmux/plugins/vim-tmux-navigator
+tmux/.config/tmux/plugins/tpm
