@@ -3,8 +3,20 @@ return {
 	priority = 1000,
 	lazy = false,
 	keys = {
-		{ "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Workspace diagnostics" },
-		{ "<leader>ih", function() Snacks.image.hover() end, desc = "Hover image preview" },
+		{
+			"<leader>sd",
+			function()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "Workspace diagnostics",
+		},
+		{
+			"<leader>ih",
+			function()
+				Snacks.image.hover()
+			end,
+			desc = "Hover image preview",
+		},
 		{
 			"<leader>iH",
 			function()
