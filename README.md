@@ -1,6 +1,6 @@
 # Dotfiles
 
-My configuration files for Neovim, Fish shell, and Tmux, managed with GNU Stow.
+My configuration files for Neovim, Fish shell, Tmux, Ghostty, and Claude Code, managed with GNU Stow.
 
 ## How it works
 This repository uses **GNU Stow** to manage symlinks. The folder structure inside each "package" (like `nvim/`, `fish/`, or `tmux/`) mimics the structure of your home directory. 
@@ -31,6 +31,10 @@ git push
    ```bash
    cd ~/dotfiles
    ./install.sh
+   ```
+4. **Install Tmux plugins:** Tmux plugins are managed by [TPM](https://github.com/tmux-plugins/tpm) and are gitignored rather than vendored in this repo. Clone TPM, then open tmux and press `prefix + I` to fetch the rest:
+   ```bash
+   git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
    ```
 
 ## Installation (Native Windows PowerShell)
