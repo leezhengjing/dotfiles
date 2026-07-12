@@ -24,5 +24,6 @@ stow git
 stow nvim
 stow fish
 stow tmux
+stow ghostty
 
 echo "Done! Symlinks created successfully."
