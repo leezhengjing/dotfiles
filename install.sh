@@ -26,5 +26,6 @@ stow fish
 stow tmux
 stow ghostty
 stow claude
+stow scripts
 
 echo "Done! Symlinks created successfully."
