@@ -38,6 +38,11 @@ if status is-interactive
     alias algo-practice='python3 ~/Github/algo-practice/test_current.py'
     alias python=python3
     alias pip=pip3
+
+    # Prompt
+    if type -q starship
+        starship init fish | source
+    end
 end
 
 # --- Google Cloud SDK ---

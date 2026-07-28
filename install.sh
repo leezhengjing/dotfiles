@@ -27,5 +27,6 @@ stow tmux
 stow ghostty
 stow claude
 stow scripts
+stow starship
 
 echo "Done! Symlinks created successfully."
