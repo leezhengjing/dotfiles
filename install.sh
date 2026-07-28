@@ -28,5 +28,6 @@ stow ghostty
 stow claude
 stow scripts
 stow starship
+stow lazygit
 
 echo "Done! Symlinks created successfully."

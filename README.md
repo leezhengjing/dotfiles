@@ -1,6 +1,6 @@
 # Dotfiles
 
-My configuration files for Neovim, Fish shell, Tmux, Ghostty, and Claude Code, managed with GNU Stow.
+My configuration files for Neovim, Fish shell, Tmux, Ghostty, Lazygit, and Claude Code, managed with GNU Stow.
 
 ## How it works
 This repository uses **GNU Stow** to manage symlinks. The folder structure inside each "package" (like `nvim/`, `fish/`, or `tmux/`) mimics the structure of your home directory. 
