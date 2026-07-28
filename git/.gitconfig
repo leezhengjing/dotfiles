@@ -4,9 +4,19 @@
 [interactive]
     diffFilter = delta --color-only
 
+[diff]
+    tool = nvim-tmux
+
+[difftool]
+    prompt = false
+
+[difftool "nvim-tmux"]
+    cmd = git-difftool-tmux \"$LOCAL\" \"$REMOTE\"
+
 [delta]
     navigate = true
     dark = true
+    side-by-side = true
 
 [merge]
     conflictStyle = zdiff3

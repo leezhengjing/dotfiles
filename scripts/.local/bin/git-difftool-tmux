@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# git difftool helper: opens nvim -d in a brand new tmux window instead of
+# nested inside whatever pty invoked git difftool (e.g. lazygit's floating
+# popup inside Neovim), so the diff gets the full terminal instead of being
+# cramped inside that popup. Falls back to a plain inline nvim -d outside tmux.
+
+local_file=$1
+remote_file=$2
+
+if [[ -z $TMUX ]]; then
+    exec nvim -d "$local_file" "$remote_file"
+fi
+
+signal="difftool-done-$$"
+cmd=$(printf 'nvim -d %q %q; tmux wait-for -S %q' "$local_file" "$remote_file" "$signal")
+tmux new-window -n difftool "$cmd"
+tmux wait-for "$signal"
