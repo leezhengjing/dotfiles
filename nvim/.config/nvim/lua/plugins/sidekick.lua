@@ -33,6 +33,46 @@ return {
 			},
 		},
 	},
+	config = function(_, opts)
+		require("sidekick").setup(opts)
+
+		-- Show each tmux session's live pane title (e.g. Claude Code's current
+		-- task, set via OSC title escapes and mirrored by tmux.conf's
+		-- automatic-rename-format) in the "Select CLI tool" picker, so multiple
+		-- sessions of the same tool/cwd can be told apart.
+		local ok, select_ui = pcall(require, "sidekick.cli.ui.select")
+		if not ok then
+			return
+		end
+
+		local function tmux_pane_title(pane_id)
+			if not pane_id then
+				return nil
+			end
+			local ok_out, out = pcall(vim.fn.system, { "tmux", "display-message", "-p", "-t", pane_id, "#{pane_title}" })
+			if not ok_out or vim.v.shell_error ~= 0 then
+				return nil
+			end
+			local title = vim.trim(out)
+			return title ~= "" and title or nil
+		end
+
+		local base_format = select_ui.format
+		function select_ui.format(state, picker)
+			local ret = base_format(state, picker)
+			local session = state.session
+			local title = session and session.tmux_pane_id and tmux_pane_title(session.tmux_pane_id)
+			if title then
+				local max = 60
+				if #title > max then
+					title = title:sub(1, max - 1) .. "…"
+				end
+				ret[#ret + 1] = { "  " }
+				ret[#ret + 1] = { title, "Comment" }
+			end
+			return ret
+		end
+	end,
 	keys = {
 		-- {
 		-- 	"<tab>",
