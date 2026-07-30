@@ -133,3 +133,20 @@ vim.keymap.set("n", "<leader>cP", function()
 	vim.fn.setreg("+", tree)
 	vim.notify(tree, vim.log.levels.INFO, { title = "Tree path copied" })
 end, { desc = "Copy file path as tree to clipboard" })
+
+-- Insert Side-by-Side Images HTML snippet
+vim.keymap.set("n", "<leader>is", function()
+	local snippet = {
+		'<div style="display: flex; gap: 10px;">',
+		'  <div style="flex: 1; text-align: center;">',
+		'    <img src="attachments/image1.png" style="width: 100%;" />',
+		'    <br /><i>Caption 1</i>',
+		'  </div>',
+		'  <div style="flex: 1; text-align: center;">',
+		'    <img src="attachments/image2.png" style="width: 100%;" />',
+		'    <br /><i>Caption 2</i>',
+		'  </div>',
+		'</div>',
+	}
+	vim.api.nvim_put(snippet, "l", true, true)
+end, { desc = "Insert side-by-side images div" })
