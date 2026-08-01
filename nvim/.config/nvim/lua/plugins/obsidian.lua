@@ -1,7 +1,7 @@
 local user = vim.env.USER
 local vault_paths = {
-	SIPSS0694 = vim.fn.expand("~/Google Drive/Other computers/My Mac/Google Drive/Obsidian Brain"),
-	leezhengjing = vim.fn.expand("/Users/leezhengjing/Documents/GDrive/Obsidian Brain"), -- TODO: Update this to your personal laptop's Obsidian path
+	SIPSS0694 = vim.fn.expand("~/Library/CloudStorage/GoogleDrive-zhengjing.lee86@gmail.com/My Drive/Obsidian Brain"),
+	leezhengjing = vim.fn.expand("~/Library/CloudStorage/GoogleDrive-zhengjing.lee86@gmail.com/My Drive/Obsidian Brain"),
 }
 local vault_path = vault_paths[user] or vim.fn.expand("~/Obsidian Brain")
 
