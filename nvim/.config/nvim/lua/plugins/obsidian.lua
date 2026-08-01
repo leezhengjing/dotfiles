@@ -1,9 +1,9 @@
 local user = vim.env.USER
 local vault_paths = {
 	SIPSS0694 = vim.fn.expand("~/Library/CloudStorage/GoogleDrive-zhengjing.lee86@gmail.com/My Drive/Obsidian Brain"),
-	leezhengjing = vim.fn.expand("~/Library/CloudStorage/GoogleDrive-zhengjing.lee86@gmail.com/My Drive/Obsidian Brain"),
+	leezhengjing = vim.fn.expand("~/Google Drive/My Drive/Obsidian Brain"),
 }
-local vault_path = vault_paths[user] or vim.fn.expand("~/Obsidian Brain")
+local vault_path = vault_paths[user] or vim.fn.expand("~/Google Drive/My Drive/Obsidian Brain")
 
 return {
 	"obsidian-nvim/obsidian.nvim",

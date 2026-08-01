@@ -44,6 +44,20 @@ return {
 			local mini_files = require("mini.files")
 			mini_files.setup({})
 
+			-- Open file under cursor in Finder using `gx`
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "MiniFilesBufferCreate",
+				callback = function(args)
+					local buf_id = args.data.buf_id
+					vim.keymap.set("n", "gx", function()
+						local entry = mini_files.get_fs_entry()
+						if entry and entry.fs_type == "file" then
+							vim.fn.system({ "open", entry.path })
+						end
+					end, { buffer = buf_id, desc = "Open in Finder" })
+				end,
+			})
+
 			-- Toggle file explorer
 			vim.keymap.set("n", "<leader>e", function()
 				if mini_files.close() then
