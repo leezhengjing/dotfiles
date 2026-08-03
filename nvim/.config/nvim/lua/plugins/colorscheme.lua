@@ -17,13 +17,27 @@ return {
 	-- 		vim.cmd.colorscheme("terafox")
 	-- 	end,
 	-- },
+	-- {
+	-- 	"ellisonleao/gruvbox.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		-- vim.o.background = "light"
+	-- 		vim.o.background = "dark"
+	-- 		vim.cmd.colorscheme("gruvbox")
+	-- 	end,
+	-- },
 	{
-		"ellisonleao/gruvbox.nvim",
+		"maxmx03/solarized.nvim",
+		lazy = false,
 		priority = 1000,
 		config = function()
-			-- vim.o.background = "light"
 			vim.o.background = "dark"
-			vim.cmd.colorscheme("gruvbox")
+			require("solarized").setup({
+				transparent = { enabled = false },
+				variant = "winter",
+				styles = { comments = { italic = true } },
+			})
+			vim.cmd.colorscheme("solarized")
 		end,
 	},
 }
